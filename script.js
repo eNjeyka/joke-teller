@@ -1,3 +1,6 @@
+const audioElement = document.getElementById("audio");
+const button = document.getElementById("button");
+
 // VoiceRSS Javascript SDK
 const VoiceRSS = {
     speech: function (e) {
@@ -72,3 +75,34 @@ const VoiceRSS = {
         throw "The browser does not support HTTP request";
     },
 };
+
+function tellMe(joke) {
+    VoiceRSS.speech({
+        key: "7735c31411994720adb0c0c830181767",
+        src: joke,
+        hl: "en-us",
+        r: 0,
+        c: "mp3",
+        f: "44khz_16bit_stereo",
+        ssml: false,
+    });
+}
+
+async function getJokes() {
+    const API_URL = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        tellMe(data.joke);
+        toggleButton();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function toggleButton() {
+    button.disabled = !button.disabled;
+}
+
+button.addEventListener("click", getJokes);
+audioElement.addEventListener("ended", toggleButton);
