@@ -1,0 +1,16 @@
+/* ROBOT.GIF from Giphy - https://giphy.com/gifs/robot-cinema-4d-eyedesyn-3o7abtn7DuREEpsyWY */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    background-color: #111111;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
